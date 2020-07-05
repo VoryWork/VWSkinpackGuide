@@ -1,0 +1,28 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="minefest_demo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">{
+  "header": {
+    "version": [
+      %ver1
+    ],
+    "description": "%des",
+    "name": "%name",
+    "uuid": "%uuid1"
+  },
+  "modules": [
+    {
+      "version": [
+        %ver2
+      ],
+      "type": "skin_pack",
+      "uuid": "%uuid2"
+    }
+  ],
+  "format_version": 1
+}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,197 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SkinPackMaker"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="MainWindow"
+    
+        mc:Ignorable="d"
+        Title="SkinpackMaker" Height="720" Width="1280" Style="{DynamicResource WindowStyle1}" AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ControlTemplate x:Key="WindowTemplateKey" TargetType="{x:Type Window}">
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                <Grid>
+                    <AdornerDecorator>
+                        <ContentPresenter/>
+                    </AdornerDecorator>
+                    <ResizeGrip x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
+                </Grid>
+            </Border>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                        <Condition Property="WindowState" Value="Normal"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
+                </MultiTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="WindowStyle1" TargetType="{x:Type Window}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="10">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="0" Opacity="0.4"/>
+                            </Border.Effect>
+                            <AdornerDecorator>
+                                <ContentPresenter/>
+                            </AdornerDecorator>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                    <Setter Property="Template" Value="{StaticResource WindowTemplateKey}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="KillButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="Storyboard1">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FF0B304A"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FFFF4040"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                            <Storyboard x:Key="Storyboard2">
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                    <EasingColorKeyFrame KeyTime="0" Value="#FFFF4040"/>
+                                    <EasingColorKeyFrame KeyTime="0:0:0.5" Value="#FF0B304A"/>
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Border x:Name="border" SnapsToDevicePixels="true" Background="#00FF4040">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0:0:0.25"/>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFFF4040"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="border">
+                                                <EasingColorKeyFrame KeyTime="0" Value="#FFC04040"/>
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True"/>
+                            <Trigger Property="IsMouseOver" Value="true"/>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false"/>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="White">
+        <Image x:Name="Bkg" Margin="0,0,0,500" Source="background.jpg" Height="200" Stretch="Fill"/>
+        <Grid x:Name="Start" HorizontalAlignment="Left" Height="500" VerticalAlignment="Bottom" Width="1260">
+            <Button x:Name="Next1" Content="开始制作" HorizontalAlignment="Right" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="160" Height="40"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="20,128,20,20" Foreground="#FF1B2C57"><Run FontSize="22" Text="为什么"/><Run FontSize="22" Text="推荐"/><Run FontSize="22" Text="把皮肤"/><Run FontSize="22" Text="打包为"/><Run FontSize="22" Text="皮肤包？"/></TextBlock>
+            <TextBlock x:Name="TB1" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="0,200,0,0" Foreground="#FF464646" FontSize="18" TextAlignment="Center"><Run Text="使用导入的皮会导致"/><Run Text="您的皮肤"/><Run Text="串味"/><LineBreak/><Run Text="本程序可帮助你"/><LineBreak/><Run Text="简单的制作皮肤包"/><LineBreak/><Run Text="无需任何编程基础"/><LineBreak/><Run Text="仅需准备好皮肤文件即可"/><LineBreak/><Run Text="打包好的皮肤包可以直接安装"/><LineBreak/><Run/></TextBlock>
+            <Button x:Name="About" Content="关于本程序" HorizontalAlignment="Left" Margin="25,0,25,25" VerticalAlignment="Bottom" Width="160" Height="40"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="1260">
+            <TextBlock x:Name="Start_Title" HorizontalAlignment="Left" Margin="128,128,0,0" TextWrapping="Wrap" Text="开始制作" VerticalAlignment="Top" FontSize="28" Foreground="White" RenderTransformOrigin="0.857,0.731"/>
+            <TextBlock x:Name="Minifest_title" HorizontalAlignment="Left" Margin="420,128,0,0" TextWrapping="Wrap" Text="编写信息" VerticalAlignment="Top" FontSize="28" Foreground="White" Padding="0" Opacity="0.5"/>
+            <TextBlock x:Name="Add_title" HorizontalAlignment="Right" Margin="0,128,420,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="28" Foreground="White" Padding="0" Opacity="0.5"><Run Text="添加皮肤"/></TextBlock>
+            <TextBlock x:Name="Make_title" HorizontalAlignment="Right" TextWrapping="Wrap" Text="生成文件" VerticalAlignment="Top" FontSize="28" Foreground="White" Padding="0" Margin="0,128,128,0" Opacity="0.5"/>
+            <TextBlock x:Name="title" HorizontalAlignment="Center" TextWrapping="Wrap" Text="ivory皮肤包制作器" VerticalAlignment="Top" FontSize="20" Foreground="White" Padding="0" Margin="0,10,0,0"/>
+        </Grid>
+        <Grid x:Name="Minifest" HorizontalAlignment="Left" Height="500" VerticalAlignment="Bottom" Width="1260" Background="White" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="317*"/>
+                <RowDefinition Height="183*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="Next2" Content="添加皮肤" HorizontalAlignment="Right" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="498,32,498,0" Foreground="#FF1B2C57"><Run FontSize="22" Text="请填写皮肤包的基础信息："/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="450,96,0,0" Foreground="#FF1B2C57" Text="名称：" FontSize="22"/>
+            <TextBox x:Name="pack_name" HorizontalAlignment="Left" Margin="516,92,0,0" TextWrapping="Wrap" Text="我的皮肤包" VerticalAlignment="Top" Width="300" FontSize="22" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="450,144,0,0" Foreground="#FF1B2C57" Text="描述：" FontSize="22"/>
+            <TextBox x:Name="des" HorizontalAlignment="Left" Margin="516,140,0,0" TextWrapping="Wrap" Text="基于制作器制作" VerticalAlignment="Top" Width="300" FontSize="22" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="450,192,0,0" Foreground="#FF1B2C57" Text="版本：" FontSize="22"/>
+            <TextBox x:Name="ver1" HorizontalAlignment="Left" Margin="516,188,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="88" FontSize="22" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <TextBox x:Name="ver3" HorizontalAlignment="Left" Margin="728,188,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="88" FontSize="22" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <TextBox x:Name="ver2" HorizontalAlignment="Left" Margin="621,188,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="88" FontSize="22" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="425.03,240,0,0" Foreground="#FF1B2C57" Text="UUID1：" FontSize="22"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="425.03,288,0,0" Foreground="#FF1B2C57" Text="UUID2：" FontSize="22"/>
+            <TextBox x:Name="uuid1" HorizontalAlignment="Left" Margin="516,246.24,0,0" TextWrapping="Wrap" Text="基于制作器制作" VerticalAlignment="Top" Width="300" FontSize="10" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <TextBox x:Name="uuid2" HorizontalAlignment="Left" Margin="516,294.24,0,0" TextWrapping="Wrap" Text="基于制作器制作" VerticalAlignment="Top" Width="300" FontSize="10" Foreground="#FF1B2C57" TextAlignment="Center"/>
+            <Button x:Name="UUIDreset" Content="重新计算UUID" HorizontalAlignment="Right" Margin="0,0,200,25" VerticalAlignment="Bottom" Width="160" Height="40" Grid.Row="1"/>
+        </Grid>
+        <Grid x:Name="Add" HorizontalAlignment="Left" Height="500" VerticalAlignment="Bottom" Width="1260" Background="White" Visibility="Hidden">
+            <Button x:Name="Next3" Content="生成" HorizontalAlignment="Right" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="160" Height="40"/>
+            <Button x:Name="skin_add" Content="添加皮肤" HorizontalAlignment="Right" Margin="0,0,200,25" VerticalAlignment="Bottom" Width="160" Height="40"/>
+            <TextBlock x:Name="count" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="25,25,0,25" Foreground="#FF1B2C57" FontSize="36" Text="0"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="72,0,0,32" Foreground="#FF1B2C57"><Run FontSize="22" Text="个皮肤已添加到皮肤包中"/></TextBlock>
+            <Image x:Name="preview" HorizontalAlignment="Left" Height="240" Margin="48,72,0,0" VerticalAlignment="Top" Width="240" Source="none.jpg" Panel.ZIndex="6" RenderOptions.BitmapScalingMode="NearestNeighbor" Stretch="Fill"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="450,96,0,0" Foreground="#FF1B2C57" Text="贴图：" FontSize="22"/>
+            <TextBox x:Name="file" HorizontalAlignment="Left" Margin="516,102.156,0,0" TextWrapping="Wrap" Text="尚未选择贴图" VerticalAlignment="Top" Width="544" Foreground="#FF1B2C57" TextAlignment="Center" IsReadOnly="True"/>
+            <Button x:Name="png_select" Content="选择贴图文件" HorizontalAlignment="Right" Margin="0,0,25,371.06" VerticalAlignment="Bottom" Width="160" Height="40"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="450,172,0,0" Foreground="#FF1B2C57" Text="名称：" FontSize="22"/>
+            <TextBox x:Name="skin_name" HorizontalAlignment="Left" Margin="516,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="719" FontSize="22" Foreground="#FF1B2C57" TextAlignment="Center" Text="我的皮肤"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="450,240,0,0" Foreground="#FF1B2C57" Text="模型：" FontSize="22"/>
+            <RadioButton x:Name="Slim" Content="CutomSlim / Alex / 细手臂" HorizontalAlignment="Left" Margin="516,240,0,0" VerticalAlignment="Top" FontSize="22" Foreground="#FF1B2C57" GroupName="Model"/>
+            <RadioButton x:Name="Classic" Content="Custom / Steve /粗手臂" HorizontalAlignment="Left" Margin="840,240,0,0" VerticalAlignment="Top" FontSize="22" Foreground="#FF1B2C57" GroupName="Model"/>
+        </Grid>
+        <Grid x:Name="Make" HorizontalAlignment="Left" Height="500" VerticalAlignment="Bottom" Width="1260" Background="White" Visibility="Hidden">
+            <Button x:Name="Next4" Content="生成mcpack文件" HorizontalAlignment="Right" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="160" Height="40"/>
+            <TextBlock x:Name="count_final" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="25,25,0,25" Foreground="#FF1B2C57" FontSize="36" Text="0"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Bottom" Margin="72,0,0,32" Foreground="#FF1B2C57"><Run FontSize="22" Text="个皮肤已添加到皮肤包中"/></TextBlock>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="234,196.3,0,0" Foreground="#FF1B2C57" Text="生成目录：" FontSize="22"/>
+            <TextBox x:Name="file1" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="尚未选择位置" VerticalAlignment="Top" Width="544" Foreground="#FF1B2C57" TextAlignment="Center" IsReadOnly="True"/>
+            <Button x:Name="mcpack_select" Content="浏览" HorizontalAlignment="Right" Margin="0,0,176,269.143" VerticalAlignment="Bottom" Width="160" Height="40"/>
+            <TextBlock x:Name="status" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Margin="465,128,465,0" Foreground="#FF1B2C57"><Run FontSize="22" Text="看来一切皆已就绪"/><LineBreak/><Run FontSize="22"/></TextBlock>
+            <Button x:Name="Next5" Content="再整一个" HorizontalAlignment="Right" Margin="0,0,25,25" VerticalAlignment="Bottom" Width="160" Height="40" Visibility="Hidden"/>
+        </Grid>
+        <Button x:Name="Kill" Content="×" HorizontalAlignment="Right" VerticalAlignment="Top" Width="60" Height="60" Style="{DynamicResource KillButton}" Foreground="White" FontSize="36"/>
+
+    </Grid>
+</Window>
